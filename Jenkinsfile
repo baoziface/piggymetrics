@@ -20,5 +20,21 @@ pipeline {
               }
           }
     }
+	      stage('deploy') {
+      when {
+        branch "master"
+      }
+      agent {
+        label 'docker'
+      }
+      steps {
+        withKubeConfig([
+          credentialsId: 'k8s',
+          contextName: 'kubernetes'
+        ]) {
+          sh 'kubectl apply -f ./account-service/account-service.yaml'
+        }
+      }
+    }
   }
 }
