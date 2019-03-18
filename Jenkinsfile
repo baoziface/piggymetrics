@@ -32,7 +32,7 @@ pipeline {
           credentialsId: 'k8s',
           contextName: 'kubernetes'
         ]) {
-          sh 'kubectl apply -f ./account-service/account-service.yaml'
+          sh 'kubectl apply -f ./auth-service/auth-service.yaml'
         }
       }
     }
