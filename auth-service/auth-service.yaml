@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: auth-service
+  name: auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: auth-service
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: auth-service
+    spec:
+      containers:
+      - image: baoziface/auth-service:v1
+        name: auth-service
+        ports:
+        - containerPort: 8080
+        resources: {}
+
+status: {}
