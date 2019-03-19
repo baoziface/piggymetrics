@@ -30,7 +30,7 @@ stage('deploy') {
       steps {
         withKubeConfig([
           credentialsId: 'k8s',
-          contextName: 'kubernetes'
+          contextName: 'minikube'
         ]) {
           sh 'kubectl apply -f ./account-service/account-service.yaml'
         }
