@@ -17,30 +17,29 @@ pipeline {
               sh 'docker build -t baoziface/auth-service:v1 ./auth-service'
               sh 'docker login --username=$DOCKER_USER --password=$DOCKER_PASSWORD'
               sh 'docker push  baoziface/auth-service:v1'
-              }
-          }*/
+              }*/
+          }
     }
-	stage('deploy') {
+    stage('deploy') {
 	      when {
-		branch "master"
+	     	branch "master"
 	      }
 	      agent {
-		label 'docker'
+		    label 'docker'
 	      }
 	      steps {
-		withKubeConfig([
-		  credentialsId: 'k8s',
-		  contextName: 'minikube'
-		]) {
-		  sh 'kubectl apply -f ./account-service/account-service.yaml'
-		}
+            withKubeConfig([
+              credentialsId: 'k8s',
+              contextName: 'minikube'
+            ]) {
+              sh 'kubectl apply -f ./account-service/account-service.yaml'
+            }
 	      }
 	    }
-	stage('deploy for dev'){
+	stage('deploy for qa'){
 	     steps{
-		input message: 'deploy for dev?'	
+		    input message: 'deploy for qa?'
 	    }
 	}
-	    
   }
 }
