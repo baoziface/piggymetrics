@@ -18,7 +18,7 @@ pipeline {
               sh 'docker login --username=$DOCKER_USER --password=$DOCKER_PASSWORD'
               sh 'docker push  baoziface/auth-service:v1'
               }*/
-              sh 'hello world'
+              echo "hello world"
           }
     }
     stage('deploy') {
